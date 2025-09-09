@@ -13,8 +13,22 @@ function App() {
   function increment (){
 
     if(value<10){
-      setValue(value+1)
-      console.log(value)
+      // setValue(value+1)
+      // setValue(value+1)
+      // setValue(value+1) 
+      //important interview question , what happen in this conditon 
+      //answer : we can understand this by 2 ways first as currently we use fiber algorithm 
+      // that send all the package in batch 
+      //value's value is not updating after multiple call to update this
+
+      setValue((prevValue)=>{
+          return prevValue+1
+      })
+
+      setValue((prevValue)=>{
+        return prevValue+1 // it take previous value as an input so it update value by 2
+    })
+  
     }
     
   }
@@ -44,6 +58,8 @@ function App() {
     <br />
     <button id="dec" onClick={decrement} >DOWN: {value}</button>
     </>
+
+    
   )
 }
 
